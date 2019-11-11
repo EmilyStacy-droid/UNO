@@ -1,5 +1,4 @@
 import org.improving.UNO.*;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
@@ -74,7 +73,7 @@ public class EvaluationCards {
     Hand hand = new Hand(deck);
     List <Card> cards = new ArrayList<>();
     var card = deck.draw();
-    hand.play(card);
+    hand.playCard(card);
     var result = deck.getDiscardPile().size();
     assertEquals(1,result);
 }

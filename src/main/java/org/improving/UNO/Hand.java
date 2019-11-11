@@ -27,7 +27,7 @@ public class Hand {
 
     }
 
-    public void play(Card card) {
+    public void playCard(Card card) {
 
         deck.addDiscard(card);
 
