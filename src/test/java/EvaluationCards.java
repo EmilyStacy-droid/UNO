@@ -148,7 +148,7 @@ public void evaluate_if_take_turns_happen(){
 @Test
 
 //looks the same as the previous test :(
- public void take_turns_run_many_times(){
+ public void first_card_change_as_turn_is_over(){
     Deck d = new Deck();
     Player p = new Player(d);
     Game g = new Game(p,d);
@@ -156,7 +156,11 @@ public void evaluate_if_take_turns_happen(){
     var firstCard = g.getFirstCard();
     var result = p.getHand().getHandList().get(0);
     assertFalse(firstCard == result);
+    System.out.println("first card is " + firstCard);
+    System.out.println("the new first card is " + result);
 
 }
+
+
 
 }
