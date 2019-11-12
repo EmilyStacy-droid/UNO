@@ -51,7 +51,6 @@ public class Deck {
         var randomIndex = random.nextInt(drawPile.size());
         var card = drawPile.get(randomIndex);
         drawPile.remove(randomIndex);
-        System.out.println("randomIndex is" + randomIndex);
 
         if (drawPile.size() == 0) {
             switchDeck();

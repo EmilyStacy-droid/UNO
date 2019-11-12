@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Hand {
-    Deck deck = new Deck();
+    Deck deck;
 
     private final List<Card> handList = new ArrayList<Card>();
 
@@ -13,10 +13,9 @@ public class Hand {
     }
 
     public void start() {
+        deck.shuffleCards(deck.getDrawPile());
 
         for (int i = 0; i < 7; i++) {
-
-            deck.shuffleCards(deck.getDrawPile());
 
             Card card = deck.draw();
 
@@ -37,4 +36,6 @@ public class Hand {
     public List<Card> getHandList() {
         return handList;
     }
+
+
 }

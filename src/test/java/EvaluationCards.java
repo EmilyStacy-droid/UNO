@@ -79,7 +79,8 @@ public class EvaluationCards {
 }
 
 //do draw for 112 times; test the length of drawpile and discardfile
-@Test public void evalute_if_switch_card_happen(){
+@Test
+public void evalute_if_switch_card_happen(){
     Deck deck = new Deck();
     Hand hand = new Hand(deck);
     List <Card> cards = new ArrayList<>();
@@ -90,4 +91,72 @@ public class EvaluationCards {
     var result = deck.getDiscardPile().size();
     assertEquals(0,result);
 }
+
+@Test
+
+    public void evaluate_if_playerGetCard(){
+    Deck d = new Deck();
+    Hand h = new Hand(d);
+    Player p = new Player(d);
+    Game g = new Game(p,d);
+    var handList = p.getHand().getHandList();
+    var result = h.getHandList();
+    assertEquals(handList,result);
+
+
+}
+
+@Test
+
+ public void evaluate_if_firstCard_generated(){
+    Deck d = new Deck();
+    Player p = new Player(d);
+    Game g = new Game(p,d);
+    g.play();
+    var firstCard = p.getHand().getHandList().get(0);
+    System.out.println("fc is " + firstCard);
+    System.out.println("hl is" + p.getHand().getHandList());
+
+   assertTrue(p.getHand().getHandList().contains(firstCard));
+
+}
+
+@Test
+
+public void evaluate_if_firstCard_removed(){
+    Deck d = new Deck();
+    Player p = new Player(d);
+    Game g = new Game(p,d);
+    g.play();
+   var result = p.getHand().getHandList().size();
+    System.out.println("dc is " + d.getDiscardPile());
+    System.out.println("hc is" + p.getHand().getHandList());
+   assertEquals(6, result);
+}
+
+@Test
+
+public void evaluate_if_take_turns_happen(){
+    Deck d = new Deck();
+    Player p = new Player(d);
+    Game g = new Game(p,d);
+    g.play();
+    var result = p.getHand().getHandList().size();
+    assertEquals(5, result);
+}
+
+@Test
+
+//looks the same as the previous test :(
+ public void take_turns_run_many_times(){
+    Deck d = new Deck();
+    Player p = new Player(d);
+    Game g = new Game(p,d);
+    g.play();
+    var firstCard = g.getFirstCard();
+    var result = p.getHand().getHandList().get(0);
+    assertFalse(firstCard == result);
+
+}
+
 }

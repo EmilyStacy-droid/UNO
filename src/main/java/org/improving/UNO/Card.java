@@ -15,10 +15,12 @@ private final Colors colors;
 
     public Colors getColors() {
         return colors;
+
     }
 
 @Override
 public String toString() {
         return" " + colors.toString() + " of " + faces.toString();
+
 }
 }
