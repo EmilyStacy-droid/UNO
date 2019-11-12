@@ -17,4 +17,6 @@ public enum Colors {
     public int getintValue() {
         return value;
     }
+
+
 }

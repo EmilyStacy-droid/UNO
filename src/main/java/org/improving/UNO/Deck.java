@@ -1,18 +1,23 @@
 package org.improving.UNO;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
+import java.util.LinkedList;
 import java.util.Random;
 import java.util.stream.Collectors;
 
 public class Deck {
-    private final List<Card> drawPile = new ArrayList<>();
-    private final List<Card> discardPile = new ArrayList<>();
+    private final LinkedList<Card> drawPile = new LinkedList<>();
+    private final LinkedList<Card> discardPile = new LinkedList<>();
+    private Player player;
+
 
     Random random = new Random();
 
     public Deck() {
+       createDeck();
+    }
+
+    public void createDeck(){
         for (int i = 0; i < 2; i++) {
             for (var face : Faces.values()) {
                 for (var color : Colors.values()) {
@@ -40,7 +45,7 @@ public class Deck {
 
     }
 
-    public List<Card> getDrawPile() {
+    public LinkedList<Card> getDrawPile() {
         return drawPile;
     }
 
@@ -48,25 +53,31 @@ public class Deck {
 // draw method
 
     public Card draw() {
-        var randomIndex = random.nextInt(drawPile.size());
-        var card = drawPile.get(randomIndex);
-        drawPile.remove(randomIndex);
-
         if (drawPile.size() == 0) {
             switchDeck();
         }
+
+        var randomIndex = random.nextInt(drawPile.size());
+
+        var card = drawPile.get(randomIndex);
+
+        // is it deck or drawPile?
+        drawPile.remove(randomIndex);
+
         return card;
     }
 
-    public List<Card> getDiscardPile() {
+    public LinkedList<Card> getDiscardPile() {
         return discardPile;
     }
-    //shufflemethod, if drawPile.size = 0; add discardPile to drawPile; clean discardPile
 
-    public List<Card> shuffleCards(List<Card> cardList) {
 
-        Collections.shuffle(cardList);
-        return cardList;
+
+
+    public LinkedList<Card> shuffleCards(LinkedList<Card> cardLinkedList) {
+
+        Collections.shuffle(cardLinkedList);
+        return cardLinkedList;
     }
 
     public void switchDeck() {
@@ -76,8 +87,5 @@ public class Deck {
 
     }
 
-    public void addDiscard(Card card) {
-        discardPile.add(card);
-    }
 
 }
