@@ -22,6 +22,7 @@ private Colors colors;
         this.colors = colors;
     }
 
+
     @Override
 public String toString() {
         return" " + colors.toString() + " of " + faces.toString();

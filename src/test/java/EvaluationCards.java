@@ -10,40 +10,51 @@ public class EvaluationCards {
 
     @Test
     public void isLegal_return_true_when_faces_match() {
-        assertTrue(true);
+       Game game = new Game();
+       game.playGame();
+       var newCard = new Card(Faces.Eight, Colors.Yellow);
+       var topCard = game.getDeck().getDiscardPile().getLast();
+        assertFalse(game.isLegal(newCard));
     }
 
 
-//    @Test
-//
-//    public void Evaluate_should_return_right_match() {
-//        Deck deck = new Deck();
-//        Hand hand = new Hand(deck);
-//        List <Card> cards = new ArrayList<>();
-//
-//        var newCard = cards.add(new Card(Faces.DrawFour, Colors.Yellow));
-//        var result = deck.getDrawPile();
-//       // System.out.println(result.size());
-//        assertFalse(result.contains(newCard));
-//    }
-//
-//    @Test
-//    public void Evaluate_drawCardPile_Return_with_right_amount(){
-//        Deck deck = new Deck();
-//        Hand hand = new Hand(deck);
-//        List <Card> cards = new ArrayList<>();
-//
-//        hand.start();
-//
-//        //var result= deck.getDrawPile().size();
-//        var result = deck.getDrawPile().size();
-//
-//        assertEquals(105,result);
-//
-//    }
-//
-//
-//    //shuffle the cards
+    @Test
+
+    public void Evaluate_should_return_right_match() {
+        Game game = new Game();
+        List <Card> cards = new ArrayList<>();
+
+        var newCard = game.getDeck().getDrawPile().add(new Card(Faces.DrawFour, Colors.Yellow));
+        var result = game.getDeck().getDrawPile();
+        assertFalse(result.contains(newCard));
+    }
+
+    @Test
+    public void Evaluate_drawCardPile_Return_with_right_amount(){
+        Game game = new Game();
+        System.out.println( game.getDeck().getDrawPile().size());
+
+        //var result= deck.getDrawPile().size();
+        var result = game.getDeck().getDrawPile().size();
+
+        assertEquals(105,result);
+
+    }
+
+
+    @Test
+
+    public void Player2GetaHand() {
+        Game game = new Game();
+        game.getPlayers().add(new Player(game.getPlayers().get(0).getHand(), game));
+        game.getPlayers().add(new Player(game.getPlayers().get(1).getHand(), game));
+        var playerOneHandSize = game.getPlayers().get(0).Handsize();
+        var playerTwoHandSize = game.getPlayers().get(1).Handsize();
+        assertEquals(playerOneHandSize, playerTwoHandSize);
+        System.out.println("Player 1 got " + game.getPlayers().get(0).getHand());
+        System.out.println("Player 2 got " + game.getPlayers().get(1).getHand());
+
+    }
 //@Test
 //
 //    public void evaluate_if__Cards_are_shuffled(){

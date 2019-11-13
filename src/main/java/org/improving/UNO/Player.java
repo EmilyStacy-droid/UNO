@@ -5,16 +5,16 @@ import java.util.List;
 
 public class Player implements PlayerInterface {
     List<Card> hand;
-    Deck deck;
+    Game game;
 
-    public Player(List<Card> hand, Deck deck) {
+    public Player(List<Card> hand, Game game) {
         this.hand = hand;
-        this.deck = deck;
+        this.game = game;
     }
 
     @Override
     public Card draw(Game game) {
-        return deck.draw();
+        return game.draw();
     }
 
     @Override
@@ -27,57 +27,43 @@ public class Player implements PlayerInterface {
         for(var card: hand) {
             if(game.isLegal(card)) {
                 return playCard(game, card);
+            }else if(!game.isLegal(card)){
+                var drawnCard = game.draw();
+                if(game.isLegal(drawnCard)) {
+                    return playCard(game, drawnCard);
+                }
+
             }
         }
 
-        var drawnCard = deck.draw();
-        if(game.isLegal(drawnCard)) {
-            return playCard(game, drawnCard);
-        }
        return null;
     }
 
     private Card playCard(Game game, Card card) {
-        if(card.getColors() == Colors.Wild) {
-            card.setColors(hand.get(0).getColors()) ;
+        if (card.getFaces() == Faces.SpinColor) {
+
+            card.setColors(hand.get(0).getColors());
             System.out.println("Player " + this.hashCode() + " set Color to " + card.getColors());
+        } else if (card.getFaces() == Faces.DrawTwo) {
+            hand.add(draw(game));
+            hand.add(draw(game));
+        } else if (card.getFaces() == Faces.DrawFour) {
+            hand.add(draw(game));
+            hand.add(draw(game));
+            hand.add(draw(game));
+            hand.add(draw(game));
+            //bug
         }
         hand.remove(card);
-        deck.getDiscardPile().add(card);
+        game.getDeck().getDiscardPile().add(card);
         return card;
     }
 
-//    public void playCard(Game game, Player player, Card card) {
-//        if(card.getFaces() == Faces.DrawTwo) {
-//            //why
-//            player.draw(game);
-//            player.draw(game);
-//        }
-//
-//        if(card.getFaces() == Faces.DrawFour) {
-//            player.draw(game);
-//            player.draw(game);
-//            player.draw(game);
-//            player.draw(game);
-//        }
-//
-//
-//        deck.addDiscard(card);
-//    }
 
     public List<Card> getHand() {
         return hand;
     }
 
-//    private void playCard(Game game, Card card) {
-//        List<Colors> namedSuit = null;
-//        hand.remove(card);
-//        if(card.getColors() == Colors.Wild) {
-//            namedSuit = hand.get(0).getColors();
-//        }
-//
-//        game.playCard(this,card,namedSuit);
-//
-//    }
+
 
 }

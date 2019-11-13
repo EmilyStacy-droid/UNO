@@ -8,8 +8,6 @@ import java.util.stream.Collectors;
 public class Deck {
     private final LinkedList<Card> drawPile = new LinkedList<>();
     private final LinkedList<Card> discardPile = new LinkedList<>();
-    private Player player;
-
 
     Random random = new Random();
 
