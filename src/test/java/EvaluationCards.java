@@ -3,19 +3,15 @@ import org.junit.jupiter.api.Test;
 
 import java.util.*;
 
+import static org.improving.UNO.Colors.Blue;
+import static org.improving.UNO.Faces.Eight;
+import static org.improving.UNO.Faces.Nine;
 import static org.junit.jupiter.api.Assertions.*;
 
 
 public class EvaluationCards {
 
-    @Test
-    public void isLegal_return_true_when_faces_match() {
-       Game game = new Game();
-       game.playGame();
-       var newCard = new Card(Faces.Eight, Colors.Yellow);
-       var topCard = game.getDeck().getDiscardPile().getLast();
-        assertFalse(game.isLegal(newCard));
-    }
+
 
 
     @Test
@@ -32,135 +28,123 @@ public class EvaluationCards {
     @Test
     public void Evaluate_drawCardPile_Return_with_right_amount(){
         Game game = new Game();
-        System.out.println( game.getDeck().getDrawPile().size());
 
-        //var result= deck.getDrawPile().size();
         var result = game.getDeck().getDrawPile().size();
 
-        assertEquals(105,result);
-
+        assertEquals(91,result);
     }
 
 
     @Test
 
-    public void Player2GetaHand() {
+    public void AllPlayerGetaHand() {
         Game game = new Game();
         game.getPlayers().add(new Player(game.getPlayers().get(0).getHand(), game));
         game.getPlayers().add(new Player(game.getPlayers().get(1).getHand(), game));
+        game.getPlayers().add(new Player(game.getPlayers().get(2).getHand(), game));
         var playerOneHandSize = game.getPlayers().get(0).Handsize();
         var playerTwoHandSize = game.getPlayers().get(1).Handsize();
-        assertEquals(playerOneHandSize, playerTwoHandSize);
-        System.out.println("Player 1 got " + game.getPlayers().get(0).getHand());
-        System.out.println("Player 2 got " + game.getPlayers().get(1).getHand());
+        var playerThreeHandSize = game.getPlayers().get(2).Handsize();
+        assertEquals(playerOneHandSize, playerTwoHandSize, playerThreeHandSize);
+//        System.out.println("Player 1 got " + game.getPlayers().get(0).getHand());
+//        System.out.println("Player 2 got " + game.getPlayers().get(1).getHand());
+//        System.out.println("Player 3 got " + game.getPlayers().get(2).getHand());
 
     }
-//@Test
-//
-//    public void evaluate_if__Cards_are_shuffled(){
-//    Deck deck = new Deck();
-//    Hand hand = new Hand(deck);
-//    List <Card> cards = new ArrayList<>();
-//    var beforeShuffle = deck.getDrawPile().get(0);
-//    hand.start();
-//    var result = deck.getDrawPile().get(0);
-//
-//    assertFalse(beforeShuffle == result);
-//
-//}
-//
-//@Test
-//    public void evaluate_if_hands_get_new_Card(){
-//    Deck deck = new Deck();
-//    Hand hand = new Hand(deck);
-//    List <Card> cards = new ArrayList<>();
-//
-//    hand.start();
-//
-//    var result = hand.getHandList().size();
-//
-//    assertEquals(7,result);
-//
-//}
-//
-//@Test
-//    public void evalute_if_discard_get_a_card(){
-//    Deck deck = new Deck();
-//    Hand hand = new Hand(deck);
-//    List <Card> cards = new ArrayList<>();
-//    var card = deck.draw();
-//    hand.playCard(card);
-//    var result = deck.getDiscardPile().size();
-//    assertEquals(1,result);
-//}
-//
-////do draw for 112 times; test the length of drawpile and discardfile
-//@Test
-//public void evalute_if_switch_card_happen(){
-//    Deck deck = new Deck();
-//    Hand hand = new Hand(deck);
-//    List <Card> cards = new ArrayList<>();
-//    for(int i=0; i<112; i++) {
-//        deck.draw();
-//    }
-//    deck.switchDeck();
-//    var result = deck.getDiscardPile().size();
-//    assertEquals(0,result);
-//}
-//
-//@Test
-//
-//    public void evaluate_if_playerGetCard(){
-//    Deck d = new Deck();
-//    Hand h = new Hand(d);
-//    Player p = new Player(d);
-//    Game g = new Game(p,d);
-//    var handList = p.getHand().getHandList();
-//    var result = h.getHandList();
-//    assertEquals(handList,result);
-//
-//
-//}
-//
-//@Test
-//
-// public void evaluate_if_firstCard_generated(){
-//    Deck d = new Deck();
-//    Player p = new Player(d);
-//    Game g = new Game(p,d);
-//    g.play();
-//    var firstCard = p.getHand().getHandList().get(0);
-//    System.out.println("fc is " + firstCard);
-//    System.out.println("hl is" + p.getHand().getHandList());
-//
-//   assertTrue(p.getHand().getHandList().contains(firstCard));
-//
-//}
-//
-//@Test
-//
-//public void evaluate_if_firstCard_removed(){
-//    Deck d = new Deck();
-//    Player p = new Player(d);
-//    Game g = new Game(p,d);
-//    g.play();
-//   var result = p.getHand().getHandList().size();
-//    System.out.println("dc is " + d.getDiscardPile());
-//    System.out.println("hc is" + p.getHand().getHandList());
-//   assertEquals(6, result);
-//}
-//
-//@Test
-//
-//public void evaluate_if_take_turns_happen(){
-//    Deck d = new Deck();
-//    Player p = new Player(d);
-//    Game g = new Game(p,d);
-//    g.play();
-//    var result = p.getHand().getHandList().size();
-//    assertEquals(5, result);
-//}
-//
+@Test
+
+    public void evaluate_if__shuffle_cards_work(){
+    Game game = new Game();
+    var beforeShuffle = game.getDeck().getDrawPile().size();
+    for(int i=0; i<game.getDeck().getDrawPile().size();i++){
+        game.draw();
+    }
+
+    var afterShuttle = game.getDeck().getDrawPile().size();
+
+    assertFalse(beforeShuffle == afterShuttle);
+
+}
+
+@Test
+    public void evaluate_if_players_class_get_new_Cards(){
+    Game game = new Game();
+    game.getPlayers().add(new Player(game.getPlayers().get(0).getHand(), game));
+    var cardFromGame = game.getDeck().getDrawPile();
+    var cardFromPlayer =  game.getPlayers().get(0).getHand();
+
+    assertFalse(cardFromGame.contains(cardFromPlayer));
+
+}
+
+
+@Test
+public void evalute_if_switch_card_happen(){
+    Game game = new Game();
+    for(int i=0; i< 91; i++) {
+        game.draw();
+    }
+    var result = game.getDeck().getDiscardPile().size();
+
+    assertEquals(0,result);
+}
+
+
+@Test
+
+ public void evaluate_if_firstCard_generated(){
+    Game game = new Game();
+    game.getFirstCard();
+    var size = game.getDeck().getDiscardPile().size();
+   assertTrue(1 == size);
+
+}
+
+@Test
+    public void isLegal_return_true_when_faces_match() {
+        Game game = new Game();
+        game.getFirstCard();
+        var topCardFace = game.getDeck().getDiscardPile().getLast().getFaces();
+        var newCard = new Card(topCardFace, Blue);
+        assertTrue(game.isLegal(newCard));
+    }
+
+@Test
+
+public void take_turns_get_one_card_returned(){
+    Game game = new Game();
+    var playerOneTurn = game.getPlayers().get(0).takeTurn(game);
+    var hand = game.getPlayers().get(0).getHand();
+    System.out.println("return is " +  playerOneTurn);
+    System.out.println("hand  is " + hand);
+
+    assertFalse(hand.contains(playerOneTurn));
+}
+
+@Test
+
+ public void play_card_work_on_draw_four()  {
+    Game game = new Game();
+    var wildCard = new Card(Faces.DrawFour, Colors.Wild);
+    game.getPlayers().get(game.getCurrentPlayer()).getHand().add(wildCard);
+    game.playCard(wildCard);
+    var player2Hand = game.getPlayers().get(game.getCurrentPlayer()).getHand().size();
+    assertEquals(11,player2Hand);
+}
+
+    @Test
+
+    public void play_card_work_on_draw_two()  {
+        Game game = new Game();
+        var wildCard = new Card(Faces.DrawTwo, Colors.Yellow);
+        game.getPlayers().get(game.getCurrentPlayer()).getHand().add(wildCard);
+        game.playCard(wildCard);
+        var player2Hand = game.getPlayers().get(game.getCurrentPlayer()).getHand().size();
+        assertEquals(9,player2Hand);
+    }
+
+// if draw 2 works-> same as above
+
 //@Test
 //
 ////looks the same as the previous test :(

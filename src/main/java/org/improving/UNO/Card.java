@@ -1,7 +1,7 @@
 package org.improving.UNO;
 
 public class Card {
-private final Faces faces;
+private Faces faces;
 private Colors colors;
 
     public Card(Faces faces, Colors colors) {
@@ -21,7 +21,9 @@ private Colors colors;
     public void setColors(Colors colors) {
         this.colors = colors;
     }
-
+public void setFaces(Faces faces) {
+        this.faces = faces;
+}
 
     @Override
 public String toString() {

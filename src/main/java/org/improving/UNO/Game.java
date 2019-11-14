@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class Game {
     private Deck deck;
     private List<Player> players = new ArrayList<Player>();
+    int currentPlayer =0;
 
 
     public Game() {
@@ -14,6 +15,7 @@ public class Game {
 
         for (int i = 0; i < 3; i++) {
             // List<Card> hand = new ArrayList<>();
+            deck.shuffleCards(this.getDeck().getDrawPile());
             var hand = drawInitialHand(new ArrayList<>());
             players.add(new Player(hand, this));
         }
@@ -24,37 +26,35 @@ public class Game {
     }
 
     public void playGame() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter the player number");
-        int x = scanner.nextInt();
-        System.out.println("There are " + x + "players.");
+//        Scanner scanner = new Scanner(System.in);
+//        System.out.println("Enter the player number");
+//        int x = scanner.nextInt();
+//        System.out.println("There are " + x + "players.");
 
         System.out.println("New Game with " + players.size() + " players ");
 
-//        for(var player: players) {
-//            drawInitialHand();
-//        }
-
-        deck.getDiscardPile().add(deck.draw());
-
-        System.out.println("The Top Card is " + deck.getDiscardPile().getLast());
-
+        getFirstCard();
 
         boolean gameInProgress = true;
         int turn = 0;
+
         while (gameInProgress) {
             try {
                 turn += 1;
+
                 System.out.println("Start Turn " + turn);
 
-                for (var player : players) {
-                    var play = player.takeTurn(this);
+                for (int i=0; i< 3; i++) {
+                    currentPlayer = i;
+                    var play = getPlayers().get(currentPlayer).takeTurn(this);
+
+
                     if (play != null) {
-                        System.out.println("Player " + player.hashCode() + " played " + play);
+                        System.out.println("Player " +getPlayers().get(currentPlayer).hashCode() + " played " + play);
                     }
 
-                    if (player.Handsize() == 0) {
-                        System.out.println("Player " + player.toString() + " has won the game on turn " + turn);
+                    if (getPlayers().get(currentPlayer).Handsize() == 0) {
+                        System.out.println("Player " + getPlayers().get(currentPlayer).toString() + " has won the game on turn " + turn);
                         gameInProgress = false;
                     }
 
@@ -66,6 +66,12 @@ public class Game {
             }
         }
 
+    }
+
+    public void getFirstCard() {
+        deck.getDiscardPile().add(deck.draw());
+
+        System.out.println("The Top Card is " + deck.getDiscardPile().getLast());
     }
 
     public List drawInitialHand(List<Card> hand) {
@@ -97,5 +103,59 @@ public class Game {
 
     public List<Player> getPlayers() {
         return players;
+    }
+
+    public int getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    public Card playCard(Card card) {
+        getPlayers().get(currentPlayer).getHand().remove(card);
+        this.getDeck().getDiscardPile().add(card);
+
+       if(card.getFaces() == Faces.DrawFour) {
+           if(currentPlayer <2) {
+               currentPlayer ++;
+               System.out.println("The player" + getPlayers().get(currentPlayer).hashCode() + "drew four cards.");
+               getPlayers().get(currentPlayer).getHand().add(draw());
+               getPlayers().get(currentPlayer).getHand().add(draw());
+               getPlayers().get(currentPlayer).getHand().add(draw());
+               getPlayers().get(currentPlayer).getHand().add(draw());
+               System.out.println("current player is " + currentPlayer);
+               return null;
+           }
+           if(currentPlayer > 2) {
+               currentPlayer =0;
+               getPlayers().get(currentPlayer).getHand().add(draw());
+               getPlayers().get(currentPlayer).getHand().add(draw());
+               getPlayers().get(currentPlayer).getHand().add(draw());
+               getPlayers().get(currentPlayer).getHand().add(draw());
+               System.out.println("current player is " + currentPlayer);
+               return null;
+           }
+
+       }
+
+        if (card.getFaces() == Faces.DrawTwo) {
+            if(currentPlayer < 2) {
+                currentPlayer ++;
+                System.out.println("The player" + getPlayers().get(currentPlayer).hashCode() + "drew two cards.");
+                getPlayers().get(currentPlayer).getHand().add(draw());
+                getPlayers().get(currentPlayer).getHand().add(draw());
+                return null;
+            }
+
+            if(currentPlayer > 2) {
+                currentPlayer = 0;
+                System.out.println("The player" + getPlayers().get(currentPlayer).hashCode() + "drew two cards.");
+                getPlayers().get(currentPlayer).getHand().add(draw());
+                getPlayers().get(currentPlayer).getHand().add(draw());
+                return null;
+            }
+//
+        }
+
+        return card;
+
     }
 }
