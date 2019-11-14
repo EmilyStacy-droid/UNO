@@ -35,22 +35,7 @@ public class EvaluationCards {
     }
 
 
-    @Test
 
-    public void AllPlayerGetaHand() {
-        Game game = new Game();
-        game.getPlayers().add(new Player(game.getPlayers().get(0).getHand(), game));
-        game.getPlayers().add(new Player(game.getPlayers().get(1).getHand(), game));
-        game.getPlayers().add(new Player(game.getPlayers().get(2).getHand(), game));
-        var playerOneHandSize = game.getPlayers().get(0).Handsize();
-        var playerTwoHandSize = game.getPlayers().get(1).Handsize();
-        var playerThreeHandSize = game.getPlayers().get(2).Handsize();
-        assertEquals(playerOneHandSize, playerTwoHandSize, playerThreeHandSize);
-//        System.out.println("Player 1 got " + game.getPlayers().get(0).getHand());
-//        System.out.println("Player 2 got " + game.getPlayers().get(1).getHand());
-//        System.out.println("Player 3 got " + game.getPlayers().get(2).getHand());
-
-    }
 @Test
 
     public void evaluate_if__shuffle_cards_work(){
@@ -120,6 +105,22 @@ public void take_turns_get_one_card_returned(){
 
     assertFalse(hand.contains(playerOneTurn));
 }
+    @Test
+
+    public void AllPlayerGetaHand() {
+        Game game = new Game();
+        game.getPlayers().add(new Player(game.getPlayers().get(0).getHand(), game));
+        game.getPlayers().add(new Player(game.getPlayers().get(1).getHand(), game));
+        game.getPlayers().add(new Player(game.getPlayers().get(2).getHand(), game));
+        var playerOneHandSize = game.getPlayers().get(0).Handsize();
+        var playerTwoHandSize = game.getPlayers().get(1).Handsize();
+        var playerThreeHandSize = game.getPlayers().get(2).Handsize();
+        assertEquals(playerOneHandSize, playerTwoHandSize, playerThreeHandSize);
+//        System.out.println("Player 1 got " + game.getPlayers().get(0).getHand());
+//        System.out.println("Player 2 got " + game.getPlayers().get(1).getHand());
+//        System.out.println("Player 3 got " + game.getPlayers().get(2).getHand());
+
+    }
 
 @Test
 
@@ -143,7 +144,9 @@ public void take_turns_get_one_card_returned(){
         assertEquals(9,player2Hand);
     }
 
-// if draw 2 works-> same as above
+
+    
+
 
 //@Test
 //
