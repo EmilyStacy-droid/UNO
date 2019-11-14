@@ -6,5 +6,5 @@ public interface PlayerInterface {
 
     int Handsize();
 
-    Card takeTurn(Game game);
+    void takeTurn(Game game);
 }

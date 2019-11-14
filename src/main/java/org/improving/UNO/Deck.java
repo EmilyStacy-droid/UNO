@@ -15,7 +15,7 @@ public class Deck {
        createDeck();
     }
 
-    public void createDeck(){
+    private void createDeck(){
         for (int i = 0; i < 2; i++) {
             for (var face : Faces.values()) {
                 for (var color : Colors.values()) {
@@ -78,7 +78,7 @@ public class Deck {
         return cardLinkedList;
     }
 
-    public void switchDeck() {
+    private void switchDeck() {
         shuffleCards(discardPile);
         drawPile.addAll(discardPile);
         discardPile.removeAll(discardPile);

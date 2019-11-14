@@ -7,8 +7,10 @@ import java.util.Scanner;
 public class Game {
     private Deck deck;
     private List<Player> players = new ArrayList<Player>();
-    int currentPlayer =0;
-
+    int currentPlayer;
+    int turnEngine;
+    int turnDirection;
+    int playerNum;
 
     public Game() {
         this.deck = new Deck();
@@ -18,7 +20,9 @@ public class Game {
             deck.shuffleCards(this.getDeck().getDrawPile());
             var hand = drawInitialHand(new ArrayList<>());
             players.add(new Player(hand, this));
+
         }
+        playerNum=players.size();
     }
 
     public Card draw() {
@@ -37,28 +41,28 @@ public class Game {
 
         boolean gameInProgress = true;
         int turn = 0;
-
+        turnEngine=0;
+        turnDirection=1;
         while (gameInProgress) {
             try {
                 turn += 1;
 
                 System.out.println("Start Turn " + turn);
+                if(turnEngine < 0){
+                    turnEngine = (turnEngine + playerNum) % playerNum;
+                }
 
-                for (int i=0; i< 3; i++) {
-                    currentPlayer = i;
-                    var play = getPlayers().get(currentPlayer).takeTurn(this);
+                    currentPlayer = turnEngine % playerNum;
 
+                    getPlayers().get(currentPlayer).takeTurn(this);
 
-                    if (play != null) {
-                        System.out.println("Player " +getPlayers().get(currentPlayer).hashCode() + " played " + play);
-                    }
 
                     if (getPlayers().get(currentPlayer).Handsize() == 0) {
-                        System.out.println("Player " + getPlayers().get(currentPlayer).toString() + " has won the game on turn " + turn);
+                        System.out.println("Player " + getPlayers().get(currentPlayer).hashCode() + " has won the game on turn " + turn);
                         gameInProgress = false;
                     }
 
-                }
+                    turnEngine += turnDirection;
 
             } catch (GameExitException ex) {
                 System.out.println("The game is over!");
@@ -68,13 +72,13 @@ public class Game {
 
     }
 
-    public void getFirstCard() {
+    private void getFirstCard() {
         deck.getDiscardPile().add(deck.draw());
 
         System.out.println("The Top Card is " + deck.getDiscardPile().getLast());
     }
 
-    public List drawInitialHand(List<Card> hand) {
+    private List drawInitialHand(List<Card> hand) {
 
         for (int i = 0; i < 7; i++) {
             hand.add(draw());
@@ -96,7 +100,7 @@ public class Game {
 
     }
 
-    public Deck getDeck() {
+    private Deck getDeck() {
         return deck;
     }
 
@@ -109,50 +113,123 @@ public class Game {
         return currentPlayer;
     }
 
+
+
+//    public boolean examineAction(Faces face) {
+//        return  face == Faces.Reverse ||
+//                face == Faces.DrawFour||
+//                face == Faces.Skip ||
+//                face == Faces.DrawTwo;
+//
+//    }
     public Card playCard(Card card) {
-        getPlayers().get(currentPlayer).getHand().remove(card);
+       // getPlayers().get(currentPlayer).getHand().remove(card);
+
         this.getDeck().getDiscardPile().add(card);
 
-       if(card.getFaces() == Faces.DrawFour) {
-           if(currentPlayer <2) {
-               currentPlayer ++;
-               System.out.println("The player" + getPlayers().get(currentPlayer).hashCode() + "drew four cards.");
-               getPlayers().get(currentPlayer).getHand().add(draw());
-               getPlayers().get(currentPlayer).getHand().add(draw());
-               getPlayers().get(currentPlayer).getHand().add(draw());
-               getPlayers().get(currentPlayer).getHand().add(draw());
-               System.out.println("current player is " + currentPlayer);
-               return null;
-           }
-           if(currentPlayer > 2) {
-               currentPlayer =0;
-               getPlayers().get(currentPlayer).getHand().add(draw());
-               getPlayers().get(currentPlayer).getHand().add(draw());
-               getPlayers().get(currentPlayer).getHand().add(draw());
-               getPlayers().get(currentPlayer).getHand().add(draw());
-               System.out.println("current player is " + currentPlayer);
-               return null;
-           }
+        if (card != null) {
+            System.out.println(" Player " +getPlayers().get(currentPlayer).hashCode() + " played " + card);
+            if(card.getFaces() == Faces.Reverse){
+                System.out.println(" The player " + getPlayers().get(currentPlayer).hashCode() + " reverse the order.");
+                turnDirection = turnDirection * (-1);
+            }
 
-       }
+            if(card.getFaces() == Faces.DrawFour) {
+               if(turnDirection == 1) {
+                   if (currentPlayer == 2) {
+                       int nextPlayer = 0;
+                       System.out.println("The player" + getPlayers().get(nextPlayer).hashCode() + " drew four cards.");
+                       getPlayers().get(nextPlayer).draw(this);
+                       getPlayers().get(nextPlayer).draw(this);
+                       getPlayers().get(nextPlayer).draw(this);
+                       getPlayers().get(nextPlayer).draw(this);
+                       System.out.println("next player is " + nextPlayer);
+                       turnEngine += turnDirection;
+                       return null;
+                   } else {
+                       int nextPlayer = currentPlayer + 1;
+                       System.out.println("The player" + getPlayers().get(nextPlayer).hashCode() + " drew four cards.");
+                       getPlayers().get(nextPlayer).draw(this);
+                       getPlayers().get(nextPlayer).draw(this);
+                       getPlayers().get(nextPlayer).draw(this);
+                       getPlayers().get(nextPlayer).draw(this);
+                       System.out.println("next player is " + nextPlayer);
+                       turnEngine += turnDirection;
+                       return null;
 
-        if (card.getFaces() == Faces.DrawTwo) {
-            if(currentPlayer < 2) {
-                currentPlayer ++;
-                System.out.println("The player" + getPlayers().get(currentPlayer).hashCode() + "drew two cards.");
-                getPlayers().get(currentPlayer).getHand().add(draw());
-                getPlayers().get(currentPlayer).getHand().add(draw());
+                   }
+               }
+
+                   if(turnDirection == -1) {
+                       if(currentPlayer == 0){
+                           int nextPlayer = 2;
+                           System.out.println(" The player " + getPlayers().get(nextPlayer).hashCode() + " drew four cards.");
+                           getPlayers().get(nextPlayer).draw(this);
+                           getPlayers().get(nextPlayer).draw(this);
+                           getPlayers().get(nextPlayer).draw(this);
+                           getPlayers().get(nextPlayer).draw(this);
+                           turnEngine+=turnDirection;
+                           return null;
+                       }else {
+                           int nextPlayer = currentPlayer - 1;
+                           System.out.println(" The player " + getPlayers().get(nextPlayer).hashCode() + " drew four cards.");
+                           getPlayers().get(nextPlayer).draw(this);
+                           getPlayers().get(nextPlayer).draw(this);
+                           getPlayers().get(nextPlayer).draw(this);
+                           getPlayers().get(nextPlayer).draw(this);
+                           turnEngine+=turnDirection;
+                           return null;
+
+                       }
+                   }
+
+               }
+
+            if (card.getFaces() == Faces.DrawTwo) {
+                if(turnDirection ==1) {
+                    if(currentPlayer ==2) {
+
+                    int nextPlayer= 0;
+                    System.out.println(" The player " + getPlayers().get(nextPlayer).hashCode() + " drew two cards.");
+                    getPlayers().get(nextPlayer).draw(this);
+                    getPlayers().get(nextPlayer).draw(this);
+                     turnEngine+=turnDirection;
+                    return null;
+                    } else {
+                        int nextPlayer = currentPlayer +1;
+                        System.out.println(" The player " + getPlayers().get(nextPlayer).hashCode() + " drew two cards.");
+                        getPlayers().get(nextPlayer).draw(this);
+                        getPlayers().get(nextPlayer).draw(this);
+                        turnEngine+=turnDirection;
+                        return null;
+                    }
+                }
+                if(turnDirection == -1) {
+                    if(currentPlayer == 0){
+                        int nextPlayer = 2;
+                        System.out.println(" The player " + getPlayers().get(nextPlayer).hashCode() + " drew two cards.");
+                        getPlayers().get(nextPlayer).draw(this);
+                        getPlayers().get(nextPlayer).draw(this);
+                        System.out.println("next player is " + nextPlayer);
+                        turnEngine+=turnDirection;
+                        return null;
+                    }else {
+                        int nextPlayer = currentPlayer - 1;
+                        System.out.println(" The player " + getPlayers().get(nextPlayer).hashCode() + " drew two cards.");
+                        getPlayers().get(nextPlayer).draw(this);
+                        getPlayers().get(nextPlayer).draw(this);
+                        turnEngine+=turnDirection;
+                        return null;
+                    }
+                }
+
+            }
+
+            if (card.getFaces() == Faces.Skip) {
+                turnEngine+=turnDirection;
                 return null;
             }
 
-            if(currentPlayer > 2) {
-                currentPlayer = 0;
-                System.out.println("The player" + getPlayers().get(currentPlayer).hashCode() + "drew two cards.");
-                getPlayers().get(currentPlayer).getHand().add(draw());
-                getPlayers().get(currentPlayer).getHand().add(draw());
-                return null;
-            }
-//
         }
 
         return card;

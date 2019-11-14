@@ -14,6 +14,7 @@ public class Player implements PlayerInterface {
 
     @Override
     public Card draw(Game game) {
+        hand.add(game.draw());
         return game.draw();
     }
 
@@ -23,29 +24,34 @@ public class Player implements PlayerInterface {
     }
 
     @Override
-    public Card takeTurn(Game game) {
+    public void takeTurn(Game game) {
         for(var card: hand) {
-            if(game.isLegal(card)) {
-                return game.playCard(card);
-            }else if (game.isLegal(card) && card.getFaces() == Faces.SpinColor ){
+            if(game.isLegal(card) && card.getFaces() == Faces.SpinColor) {
                 card.setColors(hand.get(0).getColors());
                 System.out.println("Player " + this.hashCode() + " set Color to " + card.getColors());
-                return game.playCard(card);
+                game.playCard(card);
+                hand.remove(card);
+                return;
+
+            }else if (game.isLegal(card) ){
+                game.playCard(card);
+                hand.remove(card);
+                return;
             }
              if(!game.isLegal(card)){
                 var drawnCard = game.draw();
                 if(game.isLegal(drawnCard)) {
-                    return game.playCard(card);
+                    game.playCard(card);
+                    hand.remove(card);
+                    return;
                 }
             }
         }
-
-       return null;
     }
 
-    public List<Card> getHand() {
-        return hand;
-    }
+//    public List<Card> getHand() {
+//        return hand;
+//    }
 
 
 
