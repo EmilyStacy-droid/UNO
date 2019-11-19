@@ -4,7 +4,8 @@ import java.util.*;
 
 public class Game implements IGame {
     private Deck deck = new Deck();
-    private List<EMPlayer> players;
+    private List<IPlayer> players = new ArrayList<>();
+    private IPlayer player = new EMPlayer();
     int currentPlayer;
     public int turnEngine;
     public int turnDirection;
@@ -13,22 +14,22 @@ public class Game implements IGame {
     Card topCard;
     Card firstCard;
 
+    public Game() {}
 
-    public Game(List<EMPlayer> players) {
-        this.players = players;
 
-        playerNum = players.size();
-
-        for (EMPlayer player : players) {
+    public Game(int playerNum) {
+       this.playerNum = playerNum;
+        for (var i=0; i < playerNum; i++) {
 
             deck.shuffleCards(this.getDeck().getDrawPile());
 
             var hand = drawInitialHand(new ArrayList<>());
 
-            player.hand = hand;
+            players.add(new EMPlayer(hand));
 
         }
 
+        //playerNum = players.size();
 
     }
 
@@ -38,9 +39,9 @@ public class Game implements IGame {
 
 
 @Override
-    public void play(List<EMPlayer> players) {
-        this.players = players;
+    public void play() {
         //first action: set firstCard when there is no topCard
+
         setFirstCard();
 
         setTopCard(firstCard, firstCard.getColors());
@@ -137,7 +138,14 @@ public class Game implements IGame {
 
     @Override
     public IPlayerInfo getnextnextPlayer() {
-        return null;
+
+        if(turnEngine <= 0) {
+            //abstract method to make it always positive
+            turnEngine  = turnEngine + 3*playerNum;
+        }
+        var nextnextPlayerIndex = (turnEngine + 2*turnDirection) % playerNum;
+        IPlayerInfo nextnextPlayer = players.get(nextnextPlayerIndex);
+        return nextnextPlayer;
     }
 
     @Override
@@ -163,7 +171,8 @@ public class Game implements IGame {
 
     @Override
     public IDeck getDeckInfo() {
-        return null;
+        IDeck deckInfo = this.deck;
+        return deckInfo;
     }
 
 

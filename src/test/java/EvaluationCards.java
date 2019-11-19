@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class EvaluationCards {
     List<EMPlayer> players = new ArrayList<EMPlayer>();
     ArrayList<Card> playerHand = new ArrayList<>();
-    Game game = new Game(players);
+    Game game = new Game(1);
     Deck deck = new Deck();
     @Test
 

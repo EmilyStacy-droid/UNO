@@ -28,4 +28,9 @@ public class SmartPlayer implements IPlayer {
     public int Handsize() {
         return 0;
     }
+
+    @Override
+    public String getName() {
+        return null;
+    }
 }

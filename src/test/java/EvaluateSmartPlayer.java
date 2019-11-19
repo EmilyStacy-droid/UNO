@@ -10,8 +10,8 @@ public class EvaluateSmartPlayer {
 
     public void take_turn_returns_the_most_suitable_card() {
         //arrange: check player's hand in playable
-        List<EMPlayer> players = new ArrayList<EMPlayer>();
-        Game game = new Game(players);
+        List<SmartPlayer> players = new ArrayList<SmartPlayer>();
+        Game game = new Game(1);
         Deck deck = new Deck();
         game.setDeck(deck);
         ArrayList<Card> playerHand = new ArrayList<>();

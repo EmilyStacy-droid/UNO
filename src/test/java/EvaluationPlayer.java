@@ -8,8 +8,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 public class EvaluationPlayer {
-    List<IPlayer> players = new ArrayList<IPlayer>();
-    Game game = new Game(players);
+    List<EMPlayer> players = new ArrayList<EMPlayer>();
+    Game game = new Game(1);
    Deck deck = new Deck();
     ArrayList<Card> playerHand = new ArrayList<>();
     EMPlayer player = new EMPlayer(playerHand);
@@ -33,8 +33,8 @@ public class EvaluationPlayer {
 public void take_turns_reduce_hand_size(){
 
     //arrange
-      List<IPlayer> players = new ArrayList<IPlayer>();
-      Game game = new Game(players);
+      List<EMPlayer> players = new ArrayList<EMPlayer>();
+      Game game = new Game(1);
       Deck deck = new Deck();
       ArrayList<Card> playerHand = new ArrayList<>();
       playerHand.add(new Card(Faces.Five, Colors.Yellow));

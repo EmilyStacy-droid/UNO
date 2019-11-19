@@ -25,7 +25,7 @@ public class EvaluationDeck {
             //arrange
         Deck deck = new Deck();
         List<EMPlayer> players = new ArrayList<EMPlayer>();
-        Game game = new Game(players);
+        Game game = new Game(1);
         game.setDeck(deck);
            //act
         var disCardPilesize = deck.getDiscardPile().size();
@@ -39,7 +39,7 @@ public class EvaluationDeck {
         //arrange
         Deck deck = new Deck();
         List<EMPlayer> players = new ArrayList<EMPlayer>();
-        Game game = new Game(players);
+        Game game = new Game(1);
         game.setDeck(deck);
         //act
         var result = game.setFirstCard();
@@ -55,7 +55,7 @@ public class EvaluationDeck {
         //arrange
         Deck deck = new Deck();
         List<EMPlayer> players = new ArrayList<EMPlayer>();
-        Game game = new Game(players);
+        Game game = new Game(1);
         game.setDeck(deck);
         var result = game.setFirstCard();
         //act
@@ -71,7 +71,7 @@ public class EvaluationDeck {
         //arrange
         Deck deck = new Deck();
         List<EMPlayer> players = new ArrayList<EMPlayer>();
-        Game game = new Game(players);
+        Game game = new Game(1);
         game.setDeck(deck);
         var result = game.setFirstCard();
 
@@ -88,7 +88,7 @@ public class EvaluationDeck {
 //         //arrange
         Deck deck = new Deck();
         List<EMPlayer> players = new ArrayList<EMPlayer>();
-        Game game = new Game(players);
+        Game game = new Game(1);
         game.setDeck(deck);
         var firstCard = game.setFirstCard();
         var topCard = new Card(Faces.Five, Colors.Yellow);
@@ -108,7 +108,7 @@ public class EvaluationDeck {
         //arrange
         Deck deck = new Deck();
         List<EMPlayer> players = new ArrayList<EMPlayer>();
-        Game game = new Game(players);
+        Game game = new Game(1);
         game.setDeck(deck);
         var firstCard = game.setFirstCard();
         //action

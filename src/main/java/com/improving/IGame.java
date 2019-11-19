@@ -4,13 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IGame{
+
     void playCard(Card card, Optional<Colors> declaredColor);
 
     boolean isPlayable(Card card);
 
     Card draw();
-
-    public void play(List<EMPlayer> players);
 
     public List<IPlayerInfo> getPlayerInfo();
 
@@ -22,6 +21,7 @@ public interface IGame{
 
     public IDeck getDeckInfo();
 
+    public void play();
 
 }
 

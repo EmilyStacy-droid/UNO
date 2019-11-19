@@ -9,21 +9,17 @@ public class Main {
 
         final Scanner scanner = new Scanner(System.in);
 
-        List<EMPlayer> players = new ArrayList<EMPlayer>();
 
         System.out.println("UNO game is going to start, how many players do you want? >>");
-        System.out.println();
 
         int playerNum = scanner.nextInt();
 
-        for(int i=0; i<playerNum;i++){
-        players.add(new EMPlayer());
-        }
 
-        Game g = new Game(players);
 
-        System.out.println("New Game with " + players.size() + " players ");
+        Game g = new Game(playerNum);
 
-        g.play(players);
+        System.out.println("New Game with " + playerNum + " players ");
+
+        g.play();
     }
 }

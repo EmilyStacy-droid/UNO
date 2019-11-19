@@ -4,5 +4,7 @@ public interface IPlayerInfo {
 
     int Handsize();
 
+    String getName();
+
 
 }
