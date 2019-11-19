@@ -82,7 +82,24 @@ public void take_turns_reduce_hand_size(){
 @Test
 
  public void take_turn_returns_the_most_suitable_card() {
+  //arrange: check player's hand in playable
+    List<Player> players = new ArrayList<Player>();
+    Game game = new Game(players);
+    Deck deck = new Deck();
+    game.setDeck(deck);
+    ArrayList<Card> playerHand = new ArrayList<>();
+    //set a topCard with a color
+    game.setFirstCard();
+    game.setTopCard(new Card(Faces.Five, Colors.Red), Colors.Red);
+    playerHand.add(new Card(Faces.Eight, Colors.Yellow));
+    playerHand.add(new Card(Faces.Eight, Colors.Red));
+    playerHand.add(new Card(Faces.Five, Colors.Red));
 
+
+ //act
+
+
+ //assert
 
 }
 

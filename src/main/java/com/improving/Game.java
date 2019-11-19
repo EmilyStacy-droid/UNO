@@ -62,6 +62,9 @@ public class Game implements IGame {
 
                 players.get(currentPlayer).takeTurn(this);
 
+            if (players.get(currentPlayer).Handsize() == 1) {
+                System.out.println("Player " +  this.hashCode() + " shouts out UNO" );
+            }
 
 
                 if (players.get(currentPlayer).Handsize() == 0) {

@@ -46,9 +46,7 @@ public class Player implements IPlayer {
                 playCard(drawnCard, game);
             }
 
-            if (Handsize() == 1) {
-                    System.out.println("Player " +  this.hashCode() + " shouts out UNO" );
-                }
+
         }
 
 
