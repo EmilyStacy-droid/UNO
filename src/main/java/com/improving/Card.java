@@ -1,4 +1,4 @@
-package org.improving.UNO;
+package com.improving;
 
 public class Card {
 private Faces faces;
@@ -18,12 +18,13 @@ private Colors colors;
 
     }
 
-    public void setColors(Colors colors) {
-        this.colors = colors;
-    }
-public void setFaces(Faces faces) {
-        this.faces = faces;
-}
+//    public void setColors(Colors colors) {
+//        this.colors = colors;
+//    }
+//
+//    public void setFaces(Faces faces) {
+//        this.faces = faces;
+//}
 
     @Override
 public String toString() {

@@ -1,4 +1,4 @@
-package org.improving.UNO;
+package com.improving;
 
 public enum Colors {
     Red(1),
