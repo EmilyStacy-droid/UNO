@@ -203,31 +203,30 @@ public class EvaluationGame {
         assertEquals(color, color);
     }
 
-    @Test
-    public void playCard_in_Game_pass_color_declaration_with_wild_Card() {
-
-        //arrange
-        List<Player> players = new ArrayList<Player>();
-        Game game = new Game(players);
-        Deck deck = new Deck();
-        game.setDeck(deck);
-        ArrayList<Card> playerHand = new ArrayList<>();
-        playerHand.add(new Card(Faces.Five, Colors.Wild));
-        Player player = new Player(playerHand);
-        players.add(player);
-        game.setFirstCard();
-        var playerCard = playerHand.get(0);
-        //deck.getDiscardPile().add(playerCard);
-        //game.setTopCard(playerCard, playerCard.getColors());
-        player.playCard(playerCard, game);
-        Optional<Colors> color = Optional.ofNullable(player.declareColor(playerCard,game));
-        game.playCard(playerCard, color);
-
-        //Act
-        game.setTopCard(playerCard, color.orElseThrow());
-        assertEquals(color, color);
-        assertTrue(color.isPresent());
-    }
+//    @Test
+//    public void playCard_in_Game_pass_color_declaration_with_wild_Card() {
+//
+//        //arrange
+//        List<Player> players = new ArrayList<Player>();
+//        Game game = new Game(players);
+//        Deck deck = new Deck();
+//        game.setDeck(deck);
+//        ArrayList<Card> playerHand = new ArrayList<>();
+//        playerHand.add(new Card(Faces.Five, Colors.Wild));
+//        Player player = new Player(playerHand);
+//        players.add(player);
+//        game.setFirstCard();
+//        var playerCard = playerHand.get(0);
+//        //deck.getDiscardPile().add(playerCard);
+//        //game.setTopCard(playerCard, playerCard.getColors());
+//        player.playCard(playerCard, game);
+//        Optional<Colors> color = Optional.ofNullable(player.declareColor(playerCard,game));
+//        game.playCard(playerCard, color);
+//
+//        //Act
+//        game.setTopCard(playerCard, color.orElseThrow());
+//        assertEquals(color, color);
+//    }
 
     @Test
 

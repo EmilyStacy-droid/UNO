@@ -53,31 +53,31 @@ public void take_turns_reduce_hand_size(){
     assertEquals(1,size);
 }
 
-@Test
-
- public void playCard_in_Player_pass_color_declaration(){
-
-      //arrange
-    List<Player> players = new ArrayList<Player>();
-    Game game = new Game(players);
-    Deck deck = new Deck();
-    ArrayList<Card> playerHand = new ArrayList<>();
-    playerHand.add(new Card(Faces.Five, Colors.Yellow));
-    Player player = new Player(playerHand);
-    players.add(player);
-    game.setFirstCard();
-    var playerCard = playerHand.get(0);
-    deck.getDiscardPile().add(playerCard);
-    game.setTopCard(playerCard, playerCard.getColors());
-
-
-    //act
-    Optional<Colors> color = Optional.ofNullable(player.declareColor(playerCard,game));
-    var result = game.isValidDeclaredColor(color);
-
-    //assert
-    assertTrue(result);
-}
+//@Test
+//
+// public void playCard_in_Player_pass_color_declaration(){
+//
+//      //arrange
+//    List<Player> players = new ArrayList<Player>();
+//    Game game = new Game(players);
+//    Deck deck = new Deck();
+//    ArrayList<Card> playerHand = new ArrayList<>();
+//    playerHand.add(new Card(Faces.Five, Colors.Yellow));
+//    Player player = new Player(playerHand);
+//    players.add(player);
+//    game.setFirstCard();
+//    var playerCard = playerHand.get(0);
+//    deck.getDiscardPile().add(playerCard);
+//    game.setTopCard(playerCard, playerCard.getColors());
+//
+//
+//    //act
+//    Optional<Colors> color = Optional.ofNullable(player.declareColor(playerCard,game));
+//    var result = game.isValidDeclaredColor(color);
+//
+//    //assert
+//    assertTrue(result);
+//}
 
 @Test
 
