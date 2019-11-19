@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 public class EvaluationCards {
-    List<Player> players = new ArrayList<Player>();
+    List<EMPlayer> players = new ArrayList<EMPlayer>();
     ArrayList<Card> playerHand = new ArrayList<>();
     Game game = new Game(players);
     Deck deck = new Deck();
@@ -47,7 +47,7 @@ public class EvaluationCards {
         var cardFromGame = game.draw();
         var drawPile = deck.getDrawPile();
         playerHand.add(cardFromGame);
-        players.add(new Player(playerHand));
+        players.add(new EMPlayer(playerHand));
         var cardFromPlayer =  playerHand.get(0);
         assertFalse(drawPile.contains(cardFromPlayer));
 
@@ -80,8 +80,8 @@ public class EvaluationCards {
         this.players = players;
        ArrayList<Card> playerHand1 = new ArrayList<>();
        ArrayList<Card> playerHand2 = new ArrayList<>();
-        players.add(new Player(playerHand1));
-        players.add(new Player(playerHand2));
+        players.add(new EMPlayer(playerHand1));
+        players.add(new EMPlayer(playerHand2));
         game.drawInitialHand(playerHand1);
         game.drawInitialHand(playerHand2);
 

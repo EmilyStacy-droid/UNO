@@ -3,7 +3,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.*;
 
-import static com.improving.Colors.Blue;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class EvaluationGame {
@@ -11,7 +10,7 @@ public class EvaluationGame {
     @Test
 
     public void return_top_card_from_discardPile_reduce_deck(){
-        List<Player> players = new ArrayList<Player>();
+        List<EMPlayer> players = new ArrayList<EMPlayer>();
         Game game = new Game(players);
         Deck deck = new Deck();
         var firstCard = game.getTopCard();
@@ -23,7 +22,7 @@ public class EvaluationGame {
 
     @Test
     public void isLegal_return_true_when_cards_match() {
-        List<Player> players = new ArrayList<Player>();
+        List<EMPlayer> players = new ArrayList<EMPlayer>();
         Game game = new Game(players);
         Deck deck = new Deck();
         //draw a card from deck
@@ -41,7 +40,7 @@ public class EvaluationGame {
 
     @Test
     public void islegal_return_true_when_cards_are_wild(){
-        List<Player> players = new ArrayList<Player>();
+        List<EMPlayer> players = new ArrayList<EMPlayer>();
         Game game = new Game(players);
         var drawFourCard = new Card (Faces.DrawFour, Colors.Wild);
         var SpinofColorCard = new Card(Faces.SpinColor, Colors.Wild);
@@ -53,16 +52,16 @@ public class EvaluationGame {
 
     public void play_card_make_next_player_draw_four()  {
         Deck deck = new Deck();
-        List<Player> players = new ArrayList<Player>();
+        List<EMPlayer> players = new ArrayList<EMPlayer>();
         Game game = new Game(players);
         ArrayList<Card> playerHand = new ArrayList<>();
         ArrayList<Card> playerHand2 = new ArrayList<>();
         game.setDeck(deck);
         game.drawInitialHand(playerHand);
-        players.add(new Player(playerHand));
+        players.add(new EMPlayer(playerHand));
 
         game.drawInitialHand(playerHand2);
-        players.add(new Player(playerHand2));
+        players.add(new EMPlayer(playerHand2));
 
         var player1 = players.get(0);
 
@@ -85,16 +84,16 @@ public class EvaluationGame {
     public void draw_two_make_next_player_draw_two() {
 
         Deck deck = new Deck();
-        List<Player> players = new ArrayList<Player>();
+        List<EMPlayer> players = new ArrayList<EMPlayer>();
         Game game = new Game(players);
         ArrayList<Card> playerHand = new ArrayList<>();
         ArrayList<Card> playerHand2 = new ArrayList<>();
         game.setDeck(deck);
         game.drawInitialHand(playerHand);
-        players.add(new Player(playerHand));
+        players.add(new EMPlayer(playerHand));
 
         game.drawInitialHand(playerHand2);
-        players.add(new Player(playerHand2));
+        players.add(new EMPlayer(playerHand2));
 
         var player1 = players.get(0);
 
@@ -119,7 +118,7 @@ public class EvaluationGame {
     public void skip_works_on_next_player(){
 
         Deck deck = new Deck();
-        List<Player> players = new ArrayList<Player>();
+        List<EMPlayer> players = new ArrayList<EMPlayer>();
         Game game = new Game(players);
         game.setDeck(deck);
          game.turnEngine = 1;
@@ -136,15 +135,15 @@ public class EvaluationGame {
 
     public void reverse_reverse_the_order(){
         Deck deck = new Deck();
-        List<Player> players = new ArrayList<Player>();
+        List<EMPlayer> players = new ArrayList<EMPlayer>();
         Game game = new Game(players);
 
         game.setDeck(deck);
 
         ArrayList<Card> playerHand = new ArrayList<>();
         ArrayList<Card> playerHand2 = new ArrayList<>();
-        players.add(new Player(playerHand));
-        players.add(new Player(playerHand2));
+        players.add(new EMPlayer(playerHand));
+        players.add(new EMPlayer(playerHand2));
 
         game.turnEngine = 1;
         game.turnDirection = 1;
@@ -163,13 +162,13 @@ public class EvaluationGame {
     public void draw_four_reset_color(){
         //arrange
         Deck deck = new Deck();
-        List<Player> players = new ArrayList<Player>();
+        List<EMPlayer> players = new ArrayList<EMPlayer>();
         Game game = new Game(players);
         game.setDeck(deck);
         ArrayList<Card> playerHand = new ArrayList<>();
         ArrayList<Card> playerHand2 = new ArrayList<>();
-        players.add(new Player(playerHand));
-        players.add(new Player(playerHand2));
+        players.add(new EMPlayer(playerHand));
+        players.add(new EMPlayer(playerHand2));
         var player1 = players.get(0);
 
         //act
@@ -184,13 +183,13 @@ public class EvaluationGame {
     public void playCard_in_Game_pass_color_declaration() {
 
         //arrange
-        List<Player> players = new ArrayList<Player>();
+        List<EMPlayer> players = new ArrayList<EMPlayer>();
         Game game = new Game(players);
         Deck deck = new Deck();
         game.setDeck(deck);
         ArrayList<Card> playerHand = new ArrayList<>();
         playerHand.add(new Card(Faces.Five, Colors.Yellow));
-        Player player = new Player(playerHand);
+        EMPlayer player = new EMPlayer(playerHand);
         players.add(player);
         game.setFirstCard();
         var playerCard = playerHand.get(0);
@@ -232,7 +231,7 @@ public class EvaluationGame {
 
     public void color_declaration_reset_wildCard_correctly(){
         //arrange
-        List<Player> players = new ArrayList<Player>();
+        List<EMPlayer> players = new ArrayList<EMPlayer>();
         Game game = new Game(players);
         Deck deck = new Deck();
         game.setDeck(deck);
@@ -240,7 +239,7 @@ public class EvaluationGame {
         game.setTopCard(new Card(Faces.SpinColor, Colors.Wild), Colors.Red);
         ArrayList<Card> playerHand = new ArrayList<>();
         playerHand.add(new Card(Faces.Five, Colors.Red));
-        Player player1 = new Player(playerHand);
+        EMPlayer player1 = new EMPlayer(playerHand);
         players.add(player1);
         var player1Card = playerHand.get(0);
         player1.playCard(player1Card, game);

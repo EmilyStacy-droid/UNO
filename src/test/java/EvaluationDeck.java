@@ -24,7 +24,7 @@ public class EvaluationDeck {
 
             //arrange
         Deck deck = new Deck();
-        List<Player> players = new ArrayList<Player>();
+        List<EMPlayer> players = new ArrayList<EMPlayer>();
         Game game = new Game(players);
         game.setDeck(deck);
            //act
@@ -38,7 +38,7 @@ public class EvaluationDeck {
     public void draw_first_card_when_play() {
         //arrange
         Deck deck = new Deck();
-        List<Player> players = new ArrayList<Player>();
+        List<EMPlayer> players = new ArrayList<EMPlayer>();
         Game game = new Game(players);
         game.setDeck(deck);
         //act
@@ -54,7 +54,7 @@ public class EvaluationDeck {
     public void firstCard_reduce_deck_size(){
         //arrange
         Deck deck = new Deck();
-        List<Player> players = new ArrayList<Player>();
+        List<EMPlayer> players = new ArrayList<EMPlayer>();
         Game game = new Game(players);
         game.setDeck(deck);
         var result = game.setFirstCard();
@@ -70,7 +70,7 @@ public class EvaluationDeck {
     public void firstCard_is_passed_as_topCard(){
         //arrange
         Deck deck = new Deck();
-        List<Player> players = new ArrayList<Player>();
+        List<EMPlayer> players = new ArrayList<EMPlayer>();
         Game game = new Game(players);
         game.setDeck(deck);
         var result = game.setFirstCard();
@@ -87,7 +87,7 @@ public class EvaluationDeck {
     public void topCard_replaced_with_turns() {
 //         //arrange
         Deck deck = new Deck();
-        List<Player> players = new ArrayList<Player>();
+        List<EMPlayer> players = new ArrayList<EMPlayer>();
         Game game = new Game(players);
         game.setDeck(deck);
         var firstCard = game.setFirstCard();
@@ -107,7 +107,7 @@ public class EvaluationDeck {
     public void first_Card_not_return_actionCard(){
         //arrange
         Deck deck = new Deck();
-        List<Player> players = new ArrayList<Player>();
+        List<EMPlayer> players = new ArrayList<EMPlayer>();
         Game game = new Game(players);
         game.setDeck(deck);
         var firstCard = game.setFirstCard();

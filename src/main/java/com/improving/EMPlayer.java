@@ -4,15 +4,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Player implements IPlayer {
+public class EMPlayer implements IPlayer {
     List<Card> hand;
 
-    public Player() {
+    public EMPlayer() {
 
     }
 
 
-    public Player(List<Card> hand) {
+    public EMPlayer(List<Card> hand) {
         this.hand = hand;
 
     }

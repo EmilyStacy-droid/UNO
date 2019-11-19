@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Game implements IGame {
     private Deck deck = new Deck();
-    private List<Player> players;
+    private List<EMPlayer> players;
     int currentPlayer;
     public int turnEngine;
     public int turnDirection;
@@ -14,12 +14,12 @@ public class Game implements IGame {
     Card firstCard;
 
 
-    public Game(List<Player> players) {
+    public Game(List<EMPlayer> players) {
         this.players = players;
 
         playerNum = players.size();
 
-        for (Player player : players) {
+        for (EMPlayer player : players) {
 
             deck.shuffleCards(this.getDeck().getDrawPile());
 
@@ -38,7 +38,7 @@ public class Game implements IGame {
 
 
 @Override
-    public void play(List<Player> players) {
+    public void play(List<EMPlayer> players) {
         this.players = players;
         //first action: set firstCard when there is no topCard
         setFirstCard();

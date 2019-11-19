@@ -10,7 +10,7 @@ public interface IGame{
 
     Card draw();
 
-    public void play(List<Player> players);
+    public void play(List<EMPlayer> players);
 
     public List<IPlayerInfo> getPlayerInfo();
 
