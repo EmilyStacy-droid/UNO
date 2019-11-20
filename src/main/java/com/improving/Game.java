@@ -64,12 +64,12 @@ public class Game implements IGame {
                 players.get(currentPlayer).takeTurn(this);
 
             if (players.get(currentPlayer).Handsize() == 1) {
-                System.out.println("Player " +  this.hashCode() + " shouts out UNO" );
+                System.out.println("Player " + players.get(currentPlayer).getName() +  "  " + this.hashCode() + " shouts out UNO" );
             }
 
 
                 if (players.get(currentPlayer).Handsize() == 0) {
-                    System.out.println("Player " +  players.get(currentPlayer).hashCode() + " has won the game on turn " + turn);
+                    System.out.println("Player " +  players.get(currentPlayer).getName()+"  " + players.get(currentPlayer).hashCode() + " has won the game on turn " + turn);
                     gameInProgress = false;
                 }
 

@@ -32,12 +32,12 @@ public class EMPlayer implements IPlayer {
 
     @Override
     public String getName() {
-        return null;
+        return "Emily's player";
     }
 
     @Override
     public void takeTurn(IGame game) {
-        System.out.println("player " + this.hashCode() + " has " + this.hand);
+        System.out.println("player " + this.getName()+ " "+ this.hashCode() + " has " + this.hand);
         for(var card: hand) {
             if(game.isPlayable(card)) {
               playCard(card,game);
