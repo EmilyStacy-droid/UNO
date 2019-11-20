@@ -133,5 +133,3 @@ public class EMPlayer implements IPlayer {
 
 }
 
-//else if(topCard.getColors() == Colors.Wild){
-//        declaredColor= Optional.of(topCard.getColors()) ;
