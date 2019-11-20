@@ -30,7 +30,7 @@ public class SmartPlayer implements IPlayer {
         //take this out
         System.out.println("player " + this.getName()+ " " +  this.hashCode() + " has " + this.hand);
         for(var card: hand) {
-            filterCardFaces(hand);
+            filterCard(hand);
             if(game.isPlayable(card)) {
                 playCard(card,game);
                 return;
@@ -133,15 +133,17 @@ public class SmartPlayer implements IPlayer {
         return declaredColor;
     }
 
-    private List filterCardFaces (List<Card> cards) {
+    private List filterCard (List<Card> cards) {
        cards = cards.stream()
                 .sorted(Comparator.comparingInt(card -> card.getFaces().getPointValue()))
+                .sorted(Comparator.comparing(card -> card.getColors().getPointValue()))
                 .collect(Collectors.toList());
-
         return cards;
 
     }
 
 
 }
+
+
 
