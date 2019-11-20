@@ -11,7 +11,7 @@ public class EvaluateSmartPlayer {
     public void take_turn_returns_the_most_suitable_card() {
         //arrange: check player's hand in playable
         List<SmartPlayer> players = new ArrayList<SmartPlayer>();
-        Game game = new Game(1);
+        Game game = new Game(2);
         Deck deck = new Deck();
         game.setDeck(deck);
         ArrayList<Card> playerHand = new ArrayList<>();
@@ -32,3 +32,7 @@ public class EvaluateSmartPlayer {
     }
 
 }
+
+
+
+
