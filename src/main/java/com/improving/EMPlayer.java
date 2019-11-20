@@ -19,6 +19,12 @@ public class EMPlayer implements IPlayer {
 
 
     @Override
+    public void newHand(List<Card> cards) {
+        this.hand.clear();
+        this.hand.addAll(cards);
+    }
+
+    @Override
     public Card draw(IGame game) {
         hand.add(game.draw());
         return game.draw();
@@ -37,6 +43,7 @@ public class EMPlayer implements IPlayer {
 
     @Override
     public void takeTurn(IGame game) {
+        //take this out
         System.out.println("player " + this.getName()+ " "+ this.hashCode() + " has " + this.hand);
         for(var card: hand) {
             if(game.isPlayable(card)) {

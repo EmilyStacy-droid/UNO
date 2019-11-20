@@ -1,8 +1,7 @@
 package com.improving;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class SmartPlayer implements IPlayer {
     List<Card> hand;
@@ -13,6 +12,13 @@ public class SmartPlayer implements IPlayer {
         this.hand = hand;
 
     }
+
+    @Override
+    public void newHand(List<Card> cards) {
+        this.hand.clear();
+        this.hand.addAll(cards);
+    }
+
     @Override
     public Card draw(IGame game) {
         hand.add(game.draw());
@@ -21,8 +27,10 @@ public class SmartPlayer implements IPlayer {
 
     @Override
     public void takeTurn(IGame game) {
+        //take this out
         System.out.println("player " + this.getName()+ " " +  this.hashCode() + " has " + this.hand);
         for(var card: hand) {
+            filterCardFaces(hand);
             if(game.isPlayable(card)) {
                 playCard(card,game);
                 return;
@@ -71,7 +79,7 @@ public class SmartPlayer implements IPlayer {
         randomColors.add(Colors.Yellow);
 
         if(randomColors.contains(declaredColor)){
-            declaredColor = null;
+            declaredColor = card.getColors();
         }else if (declaredColor.equals(Colors.Wild)) {
             numWildColorCardsinHand++;
             Collections.shuffle(randomColors);
@@ -123,6 +131,15 @@ public class SmartPlayer implements IPlayer {
 
 
         return declaredColor;
+    }
+
+    private List filterCardFaces (List<Card> cards) {
+       cards = cards.stream()
+                .sorted(Comparator.comparingInt(card -> card.getFaces().getPointValue()))
+                .collect(Collectors.toList());
+
+        return cards;
+
     }
 
 
