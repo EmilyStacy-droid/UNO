@@ -5,9 +5,6 @@ import java.util.List;
 public class SmartPlayer implements IPlayer {
     List<Card> hand;
 
-    public SmartPlayer() {
-
-    }
 
 
     public SmartPlayer(List<Card> hand) {
@@ -16,11 +13,13 @@ public class SmartPlayer implements IPlayer {
     }
     @Override
     public Card draw(IGame game) {
-        return null;
+        hand.add(game.draw());
+        return game.draw();
     }
 
     @Override
     public void takeTurn(IGame game) {
+
 
     }
 

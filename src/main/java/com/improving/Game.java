@@ -25,7 +25,7 @@ public class Game implements IGame {
 
             var hand = drawInitialHand(new ArrayList<>());
 
-            players.add(new EMPlayer(hand));
+            players.add(new SmartPlayer(hand));
 
         }
 
