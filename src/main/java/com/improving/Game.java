@@ -118,23 +118,32 @@ public class Game implements IGame {
 
     @Override
     public IPlayerInfo getnextPlayer() {
-        if(turnDirection == 1){
-        if (currentPlayer == (playerNum - 1)){
-            return players.get(0);
-        }else {
-            return players.get(currentPlayer + 1);
-        }
-        }
-        if(turnDirection == (-1)){
-            if(currentPlayer == 0) {
-                return players.get(playerNum -1);
 
-            }else {
-               return players.get(currentPlayer -1);
-            }
+        if(turnEngine<=0){
+            turnEngine = turnEngine+ players.size();
         }
-        return null;
+        var nextPlayerIndex = (turnEngine+turnDirection)% players.size();
+        IPlayerInfo nextPLayer = players.get(nextPlayerIndex);
+        return nextPLayer;
     }
+
+//        if(turnDirection == 1){
+//        if (currentPlayer == (playerNum - 1)){
+//            return players.get(0);
+//        }else {
+//            return players.get(currentPlayer + 1);
+//        }
+//        }
+//        if(turnDirection == (-1)){
+//            if(currentPlayer == 0) {
+//                return players.get(playerNum -1);
+//
+//            }else {
+//               return players.get(currentPlayer -1);
+//            }
+//        }
+//        return null;
+    //}
 
     @Override
     public IPlayerInfo getnextnextPlayer() {

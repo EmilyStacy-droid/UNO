@@ -1,6 +1,8 @@
 package com.improving;
 
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class SmartPlayer implements IPlayer {
@@ -28,9 +30,15 @@ public class SmartPlayer implements IPlayer {
     @Override
     public void takeTurn(IGame game) {
         //take this out
-        System.out.println("player " + this.getName()+ " " +  this.hashCode() + " has " + this.hand);
+        //System.out.println("player " + this.getName()+ " " +  this.hashCode() + " has " + this.hand);
         for(var card: hand) {
             filterCard(hand);
+            int handSize = game.getnextPlayer().Handsize();
+            if( handSize <= 2 && checkWildCard(hand)) {
+                var wildCard = hand.stream().filter(c->c.getColors() == Colors.Wild).findFirst().get();
+               playCard(wildCard,game);
+                return;
+            }
             if(game.isPlayable(card)) {
                 playCard(card,game);
                 return;
@@ -96,39 +104,6 @@ public class SmartPlayer implements IPlayer {
             }
 
         }
-//        boolean declaredColorinHand = false;
-//
-//        //check the wild card is removed
-//
-//        int numWildColorCardsinHand = 0;
-//
-//        if(card.getColors().equals(Colors.Wild) ) {
-//            while(!declaredColorinHand) {
-//                Collections.shuffle(randomColors);
-//
-//                for(Card c:hand) {
-//                    if(c.getColors() == randomColors.get(0)){
-//                        declaredColorinHand =true;
-//                        declaredColor = c.getColors();
-//                        break;
-//                    }
-//
-//                    if(card.getColors().equals(Colors.Wild)){
-//                        numWildColorCardsinHand++;
-//                    }
-//                }
-//
-//                if(numWildColorCardsinHand == hand.size()){
-//                    Collections.shuffle(randomColors);
-//                    declaredColorinHand =true;
-//                    declaredColor = randomColors.get(0);
-//                }
-//
-//            }
-//
-//
-//        }
-
 
         return declaredColor;
     }
@@ -141,6 +116,11 @@ public class SmartPlayer implements IPlayer {
         return cards;
 
     }
+
+    private boolean checkWildCard(List<Card> cards) {
+        return cards.contains(Colors.Wild);
+    }
+
 
 
 }
