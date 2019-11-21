@@ -27,8 +27,6 @@ public class SmartPlayer implements IPlayer {
 
     @Override
     public void takeTurn(IGame game) {
-        //take this out
-        System.out.println("player " + this.getName()+ " " +  this.hashCode() + " has " + this.hand);
         for(var card: hand) {
             filterCard(hand);
             if(game.isPlayable(card)) {

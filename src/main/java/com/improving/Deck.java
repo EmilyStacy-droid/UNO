@@ -22,7 +22,7 @@ public class Deck implements IDeck {
 
                     if (face.getintValue() == 1 && color.getintValue() == 1) {
                         drawPile.add(new Card(face, color));
-                        //allCardsList.add(new Card(face, color));
+
                     }
 
                     if (face.getintValue() == 0 && color.getintValue() == 1) {
@@ -38,14 +38,14 @@ public class Deck implements IDeck {
                 for (var color : Colors.values()) {
                     if (face.getintValue() == (-1) && color.getintValue() == 0) {
                         drawPile.add(new Card(face, color));
-                        //allCardsList.add(new Card(face, color));
+
                     }
                 }
             }
         }
 
     }
-    //set it private after testing
+
 
     public LinkedList<Card> getDrawPile() {
         return drawPile;
