@@ -39,7 +39,26 @@ public class SmartPlayer implements IPlayer {
                playCard(wildCard,game);
                 return;
             }
+
             if(game.isPlayable(card)) {
+                if(handSize <=2 && checkSkipCard(hand)){
+                    var skipCard = hand.stream().filter(c->c.getFaces() == Faces.Skip).findFirst().get();
+                    playCard(skipCard, game);
+                    return;
+                }
+
+                if(handSize <=2 && checkReverseCard(hand)){
+                    var reverseCard = hand.stream().filter(c->c.getFaces() == Faces.Reverse).findFirst().get();
+                    playCard(reverseCard, game);
+                    return;
+                }
+
+                if(handSize <=2 && checkDrawTwoCard(hand)){
+                    var drawTwoCard = hand.stream().filter(c->c.getFaces() == Faces.DrawTwo).findFirst().get();
+                    playCard(drawTwoCard, game);
+                    return;
+                }
+
                 playCard(card,game);
                 return;
             }
@@ -121,7 +140,17 @@ public class SmartPlayer implements IPlayer {
         return cards.contains(Colors.Wild);
     }
 
+    private boolean checkSkipCard(List<Card> cards) {
+        return cards.contains(Faces.Skip);
+    }
 
+    private boolean checkReverseCard(List<Card> cards) {
+        return cards.contains(Faces.Reverse);
+    }
+
+    private boolean checkDrawTwoCard(List<Card> cards) {
+        return cards.contains(Faces.DrawTwo);
+    }
 
 }
 
