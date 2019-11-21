@@ -96,39 +96,6 @@ public class SmartPlayer implements IPlayer {
             }
 
         }
-//        boolean declaredColorinHand = false;
-//
-//        //check the wild card is removed
-//
-//        int numWildColorCardsinHand = 0;
-//
-//        if(card.getColors().equals(Colors.Wild) ) {
-//            while(!declaredColorinHand) {
-//                Collections.shuffle(randomColors);
-//
-//                for(Card c:hand) {
-//                    if(c.getColors() == randomColors.get(0)){
-//                        declaredColorinHand =true;
-//                        declaredColor = c.getColors();
-//                        break;
-//                    }
-//
-//                    if(card.getColors().equals(Colors.Wild)){
-//                        numWildColorCardsinHand++;
-//                    }
-//                }
-//
-//                if(numWildColorCardsinHand == hand.size()){
-//                    Collections.shuffle(randomColors);
-//                    declaredColorinHand =true;
-//                    declaredColor = randomColors.get(0);
-//                }
-//
-//            }
-//
-//
-//        }
-
 
         return declaredColor;
     }
