@@ -40,25 +40,36 @@ public class EvaluateSmartPlayer {
     }
 
     @Test
-
-    public void play_Card_stops_next_player_when_less_than_2_cards_left() {
+    //failed every two times
+    public void take_turn_play_wild_cards_when_next_player_has_less_than_2_cards_left() {
         //arrange
         Game game = new Game(2);
         Deck deck = new Deck();
         game.setDeck(deck);
+        var firstCard = game.setFirstCard();
         ArrayList<Card> playerHand = new ArrayList<>();
+        ArrayList<Card> playerHand2 = new ArrayList<>();
         SmartPlayer player = new SmartPlayer(playerHand);
+        SmartPlayer player2 = new SmartPlayer(playerHand2);
+        playerHand2.add(new Card(Faces.Four, Colors.Yellow));
+        playerHand2.add(new Card(Faces.Three, Colors.Blue));
+        playerHand2.add(new Card(Faces.Eight, Colors.Red));
         playerHand.add(new Card(Faces.Seven, Colors.Red));
         playerHand.add(new Card(Faces.Seven, Colors.Yellow));
         playerHand.add(new Card(Faces.Four, Colors.Yellow));
         playerHand.add(new Card(Faces.Three, Colors.Blue));
+        playerHand.add(new Card(Faces.DrawFour, Colors.Wild));
+        game.setTopCard(firstCard, firstCard.getColors());
+        var nextPlayer =game.getnextPlayer();
+        var handSize = nextPlayer.Handsize();
+        player2.takeTurn(game);
+        player.takeTurn(game);
 
 
         //act
-        //var topCard = game.getTopCard();
-        //var playedCard = player.playCard();
+        var topCardFaces = game.getTopCard().getFaces();
         //assert
-        //assertTrue(topCard == playedCard);
+        assertEquals(Faces.DrawFour, topCardFaces);
     }
 
 }
