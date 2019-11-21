@@ -1,8 +1,8 @@
-package org.improving.UNO;
+package com.improving;
 
 public class Card {
-private final Faces faces;
-private final Colors colors;
+private Faces faces;
+private Colors colors;
 
     public Card(Faces faces, Colors colors) {
         this.faces = faces;
@@ -15,10 +15,20 @@ private final Colors colors;
 
     public Colors getColors() {
         return colors;
+
     }
 
-@Override
+//    public void setColors(Colors colors) {
+//        this.colors = colors;
+//    }
+//
+//    public void setFaces(Faces faces) {
+//        this.faces = faces;
+//}
+
+    @Override
 public String toString() {
         return" " + colors.toString() + " of " + faces.toString();
+
 }
 }
